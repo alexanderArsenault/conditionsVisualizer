@@ -45,7 +45,7 @@
 
         <!-- radial axis -->
           <circle
-            v-for="(x, i) in percentages"
+            v-for="(x, i) in values"
             v-bind:key="`radialaxis-${x.k}`"
             :r="radialAxis(i)"
             fill="transparent"
@@ -55,7 +55,7 @@
 
         <!-- Grey fill background -->
           <path
-            v-for="(x, i) in percentages"
+            v-for="(x, i) in values"
             v-bind:key="`background-${x.k}`"
             :d="fullPath(i)"
             fill="#e5e5e5"
@@ -69,7 +69,7 @@
           <rect
             :y="i*height*0.05-19"
             fill="#fafafa"
-            :x="-20"
+            :x="-18"
             class="band-label"
             :width="width*0.165"
             :height="height*0.05"
@@ -77,7 +77,7 @@
             v-bind:key="`bg-${x.k}`"></rect>
             
           <text
-            :y="i*height*0.05 -10"
+            :y="i*height*(-0.05) + 22"
             v-for="(x, i) in values"
             v-bind:key="`label-${x.k}`"
             text-anchor="middle"
@@ -105,10 +105,10 @@ export default {
   props: {
     percentages: {
       default: () => [
-        { k: "> 15°C", v: 100 },
-        { k: "8-15°C", v: 100 },
-        { k: "2-8°C", v: 100 },
         { k: "< 2°C", v: 100 },
+        { k: "2-8°C", v: 100 },
+        { k: "8-15°C", v: 100 },
+        { k: "> 15°C", v: 100 },
       ]
     }
   },
@@ -118,10 +118,10 @@ export default {
       width: 400,
       height: 400,
       values: [
-        { k: "> 15°C", v: 100 },
-        { k: "8-15°C", v: 100 },
-        { k: "2-8°C", v: 100 },
         { k: "< 2°C", v: 100 },
+        { k: "2-8°C", v: 100 },
+        { k: "8-15°C", v: 100 },
+        { k: "> 15°C", v: 100 },
       ]
     };
   },
@@ -138,12 +138,12 @@ export default {
 
   computed: {
     minValue() {
-      return Math.floor(Math.min(...this.percentages.map(x => x.v)));
+      return Math.floor(Math.min(...this.values.map(x => x.v)));
     },
 
     stabilityScore() {
       if (this.minValue === 0) return 0
-      return Math.floor(this.percentages.reduce( (acc,curr) => { return acc = acc + curr.v}, 0) / this.percentages.length)
+      return Math.floor(this.values.reduce( (acc,curr) => { return acc = acc + curr.v}, 0) / this.values.length)
     },
     
     axialTicks(){

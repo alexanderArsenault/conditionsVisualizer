@@ -65,7 +65,6 @@ import Vue from 'vue'
 import { scaleLinear, scaleTime } from 'd3-scale'
 import { select } from 'd3-selection'
 import { axisLeft, axisBottom } from 'd3-axis'
-import { extent } from 'd3-array'
 import { line, curveCatmullRom } from 'd3-shape'
 
 const aspectRatio = 1 / (16 / 9) // 4:3 aspect ratio for beamer
@@ -146,7 +145,7 @@ export default Vue.extend({
 
     yScale () {
       return scaleLinear()
-        .domain(extent(this.yValues))
+        .domain([0,20])
         .range([this.height, 0])
     },
 
@@ -165,7 +164,8 @@ export default Vue.extend({
     },
 
     xAxis () {
-      return axisBottom()
+      return axisBottom(this.xScale).tickValues(2);
+      // return axisBottom(this.xScale).tickValues(this.xScale.domain());
     },
 
     yAxis () {
@@ -174,12 +174,6 @@ export default Vue.extend({
         .tickSize(-this.width)
         .tickSizeOuter(0)
     },
-
-    // y2Axis () {
-    //   return axisRight(this.y2Scale)
-    //     .tickFormat(format('.0%'))
-    //     .tickSizeOuter(0)
-    // },
 
     lineGenerator () {
       return line()
@@ -260,6 +254,7 @@ export default Vue.extend({
     }
   }
 })
+
 </script>
 
 <style lang="scss" scoped>

@@ -16,7 +16,7 @@
       </v-row>
       <v-row >
         <v-col md='8'>
-          <Graph :live="false" :data='tempdata' ></Graph>
+          <Graph v-if="transformedTemperatureSeries" :live="false" :data='formattedTemperatureDate' ></Graph>
         </v-col>
 
         <v-col md="4" class="psb-centered">
@@ -40,29 +40,30 @@ export default {
     RadialBarChart,
   },
   data: () => ({
-    tempdata: [],
+    transformations: [
+      {
+        start: 50,
+        end: 72,
+        amount: 2,
+      },
+
+      // {
+      //   start: 150,
+      //   end: 172,
+      //   amount: 2,
+      // },
+      // {
+      //   start: 200,
+      //   end: 250,
+      //   amount: 4,
+      // },
+      // {
+      //   start: 370,
+      //   end: 450,
+      //   amount: 2,
+      // },
+    ],
     bands: [
-      { 
-        k: "> 15°C",
-        min: 15,
-        max: 1000,
-        hours: 5,
-        v: 100
-      },
-      { 
-        k: "8-15°C",
-        min: 8,
-        max: 15,
-        hours: 100,
-        v: 100
-      },
-      { 
-        k: "2-8°C",
-        min: 8,
-        max: 15,
-        hours: 100,
-        v: 100
-      },
       { 
         k: "< 2°C",
         min:-1000,
@@ -70,32 +71,76 @@ export default {
         hours: 1,
         v: 100
       },
+      { 
+        k: "2-8°C",
+        min: 2,
+        max: 8,
+        hours: 1500,
+        v: 100
+      },
+      { 
+        k: "8-15°C",
+        min: 8,
+        max: 15,
+        hours: 500,
+        v: 100
+      },
+      { 
+        k: "> 15°C",
+        min: 15,
+        max: 1000,
+        hours: 1,
+        v: 100
+      },
     ]
   }),
-  mounted(){
-    this.tempdata = temperatures.temps.map( entry => {
-      return {
-        x: new Date(entry.x),
-        y: entry.y
-      }
-    })
-  },
   computed: {
     stabilityBudget(){
       return this.bands.reduce( (acc, curr) => {
-        acc.unshift({
+        let formatentry = {
           k: curr.k,
           v: Math.max((100 - parseInt(this.getMillisecondsSpentBetweenTemperatures(curr.min, curr.max) / (curr.hours * 60 * 60 * 1000) * 100)), 0)
-        })
-        return acc
+        }
+        return [...acc, formatentry]
       }, [])
+    },
+    formattedTemperatureDate(){
+      return temperatures.temps.reduce( (acc, curr) => {
+        return [
+          ...acc,
+          {
+          x: new Date(curr.x),
+          y: curr.y
+        }]
+      }, [])
+    },
+    transformedTemperatureSeries(){
+      return this.transformations.reduce( (acc, curr) => {
+        return this.addTemperatureBetweenIndexs(
+          curr.start,
+          curr.end,
+          curr.amount,
+          acc
+        )
+      }, this.formattedTemperatureDate)
     }
   },
   methods: {
+    addTemperatureBetweenIndexs(start, end, amount, array){
+      for (let i = start; i < end; i++){
+        let halfway = parseInt((start + end) / 2)
+        let taperedamount = amount / Math.abs(i - halfway)
+
+
+        if (taperedamount === Infinity) taperedamount = 1
+        array[i].y = array[i].y + taperedamount
+      }
+      return array
+    },
     getMillisecondsSpentBetweenTemperatures(min, max){
       let lasttime = null
       
-      return this.tempdata.reduce((acc, curr) => {
+      return this.formattedTemperatureDate.reduce((acc, curr) => {
         if (curr.y > min && curr.y < max) {
           if (lasttime === null) {
             lasttime = curr.x
