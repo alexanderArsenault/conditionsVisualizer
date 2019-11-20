@@ -1,68 +1,34 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <v-divider class="divider-lighter" dark></v-divider>
-      <h2 class="app-bar-header">Pharma Co.</h2>
-      <v-divider class="divider-lighter" dark></v-divider>
+    <v-app-bar>
+      Pharmacy
     </v-app-bar>
-
-    <v-content>
-      <v-row>
-        <EventPicker/>
-      </v-row>
-      <v-row >
-        <v-col md='8'>
-          <Graph v-if="transformedTemperatureSeries" :live="false" :data='formattedTemperatureDate' ></Graph>
+    <v-content fluid>
+      <v-row class="tablet-container" fluid fill-height>
+        <v-col md="6" class="side-tray pa-0">
+         <EventTimeline/>
         </v-col>
-
-        <v-col md="4" class="psb-centered">
-          <RadialBarChart :percentages="stabilityBudget"/>
+        <v-col md="6" class="psb-centered">
+          <div class="psb-container">
+            <RadialBarChart :percentages="stabilityBudget"/>
+          </div>
         </v-col>
       </v-row>
     </v-content>
   </v-app>
 </template>
 <script>
-import EventPicker from './components/EventPicker';
+import EventTimeline from './components/EventTimeline';
 import RadialBarChart from './components/RadialBarChart';
-import Graph from './components/Graph';
 import temperatures from './assets/shipment_data.js'
 
 export default {
   name: 'App',
   components: {
-    EventPicker,
-    Graph,
+    EventTimeline,
     RadialBarChart,
   },
   data: () => ({
-    transformations: [
-      {
-        start: 50,
-        end: 72,
-        amount: 2,
-      },
-
-      // {
-      //   start: 150,
-      //   end: 172,
-      //   amount: 2,
-      // },
-      // {
-      //   start: 200,
-      //   end: 250,
-      //   amount: 4,
-      // },
-      // {
-      //   start: 370,
-      //   end: 450,
-      //   amount: 2,
-      // },
-    ],
     bands: [
       { 
         k: "< 2°C",
@@ -163,16 +129,26 @@ export default {
 .app-bar-header {
   padding: 0 30px;
 }
-.divider-lighter {
-  border-color: #fff !important;
+
+.psb-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.barchart-container {
-  margin-left: auto;
-  margin-right: 20px;
+
+.psb-container {
   width: 400px;
   height: 400px;
+  margin-top: 30px;
 }
-.psb-centered {
-  align-items: center;
+
+.side-tray {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.tablet-container {
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 </style>

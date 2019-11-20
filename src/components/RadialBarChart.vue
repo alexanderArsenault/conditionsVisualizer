@@ -67,9 +67,9 @@
         <g :transform="`translate(0, ${height* 0.415 * -1})`">
         <!-- labels -->
           <rect
-            :y="i*height*0.05-19"
+            :y="i*height*(-0.05) + (height * 0.07)"
+            :x="- width*0.165 / 2"
             fill="#fafafa"
-            :x="-18"
             class="band-label"
             :width="width*0.165"
             :height="height*0.05"
@@ -77,7 +77,7 @@
             v-bind:key="`bg-${x.k}`"></rect>
             
           <text
-            :y="i*height*(-0.05) + 22"
+            :y="i*height*(-0.05) + (height * 0.1)"
             v-for="(x, i) in values"
             v-bind:key="`label-${x.k}`"
             text-anchor="middle"
