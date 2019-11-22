@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h3>Product Stability Budget</h3>
     <svg :width="container" :height="container" v-bind:class="{warning: minValue==0}">
       <g :transform="`translate(${(container)/2}, ${container/2})`">
 
