@@ -1,34 +1,42 @@
 <template>
   <v-app>
-    <v-app-bar>
-      Pharmacy
-    </v-app-bar>
-    <v-content fluid>
-      <v-row class="tablet-container" fluid fill-height>
-        <v-col md="6" class="side-tray pa-0">
-         <EventTimeline/>
-        </v-col>
-        <v-col md="6" class="psb-centered">
-          <div class="psb-container">
-            <RadialBarChart :percentages="stabilityBudget"/>
-          </div>
-        </v-col>
-      </v-row>
-    </v-content>
+    <!-- Navigation Bar -->
+    <v-navigation-drawer
+        v-model="drawer"
+        width="800"
+        absolute
+        temporary
+      >
+        <v-container>
+          <EventTimeline/>
+        </v-container>
+    </v-navigation-drawer>
+
+    <!-- App bar -->
+    <app-bar @openTimeline="drawer = true" />
+    <!-- App Content -->
+    <v-sheet color="#f5f5f5">
+      <home></home>
+    </v-sheet>
+    <!-- Footer -->
   </v-app>
 </template>
 <script>
+import AppBar from './components/AppBar';
+import Home from './components/Home';
 import EventTimeline from './components/EventTimeline';
-import RadialBarChart from './components/RadialBarChart';
 import temperatures from './assets/shipment_data.js'
+
 
 export default {
   name: 'App',
   components: {
+    Home,
+    AppBar,
     EventTimeline,
-    RadialBarChart,
   },
   data: () => ({
+    drawer: false,
     bands: [
       { 
         k: "< 2°C",

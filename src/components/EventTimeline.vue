@@ -20,7 +20,7 @@
         </v-card-text>
       </v-card> -->
     </v-sheet>
-    <v-card height="calc(100vh - 150px)">
+    <v-card>
         <v-card-title>Timeline</v-card-title>
       <div v-for="(panel, idx) in panels" class="timeline-list-container" :key="`timeline-group-${idx}`">
         <div class="timeline-item-container" v-for="(item, idx) in panel.timeline" :key="`timeline-item-${idx}`" >
