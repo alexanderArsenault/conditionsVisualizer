@@ -12,8 +12,9 @@
     </div>
     <div class="event-text">
       <h3>
-        <slot name="title" /><span><slot name="subtitle" /></span>
+        <slot name="title" />
       </h3>
+      <p><slot name="subtitle" /></p>
       <p>
         <slot name="date" />
       </p>
@@ -22,7 +23,7 @@
 </template>
 <script>
 export default {
-  name: 'TimelineCard',
+  name: 'TimelineIconCard',
   props: {
     color: {
       type: String,
@@ -46,7 +47,7 @@ export default {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      top: calc(100% + 9px);
+      top: calc(100% + 10px);
       border-left: 1px solid lightgrey;
       height: 25px;
     }
@@ -55,7 +56,7 @@ export default {
 
 .event-card {
   display: flex;
-  padding: 20px 0;
+  padding: 15px 0;
   align-items: center;
 }
 

@@ -16,12 +16,13 @@
             </v-list-item>
 
             <v-list-item>
-              <v-list-item-content class="caption">Forwarder:</v-list-item-content>
-              <v-list-item-content class="body">{{ card.forwarder }}</v-list-item-content>
+              <v-list-item-content class="caption">Owner:</v-list-item-content>
+              <v-list-item-content class="body">{{ card.owner }}</v-list-item-content>
             </v-list-item>
+
             <v-list-item>
-              <v-list-item-content class="caption">Transporter:</v-list-item-content>
-              <v-list-item-content class="body">{{ card.transporter }}</v-list-item-content>
+              <v-list-item-content class="caption">Sending Site:</v-list-item-content>
+              <v-list-item-content class="body">{{ card.sending}}</v-list-item-content>
             </v-list-item>
 						<v-list-item>
               <v-list-item-content class="caption">Time Sent:</v-list-item-content>
@@ -31,17 +32,19 @@
         </v-col>
         <v-col class="pt-0 pb-0" md="6">
           <v-list dense>
-            <v-list-item>
-              <v-list-item-content class="caption">Sending Site:</v-list-item-content>
-              <v-list-item-content class="body">{{ card.sending}}</v-list-item-content>
+						<v-list-item>
+              <v-list-item-content class="caption">Deviations:</v-list-item-content>
+              <v-list-item-content class="body">{{ card.deviations }}</v-list-item-content>
             </v-list-item>
+
+            <v-list-item>
+              <v-list-item-content class="caption">Time Delta:</v-list-item-content>
+              <v-list-item-content class="body">{{ card.time_delta }}</v-list-item-content>
+            </v-list-item>
+
             <v-list-item>
               <v-list-item-content class="caption">Receiving Site:</v-list-item-content>
               <v-list-item-content class="body">{{ card.receiving }}</v-list-item-content>
-            </v-list-item>
-						<v-list-item>
-              <v-list-item-content class="caption">Transport Method:</v-list-item-content>
-              <v-list-item-content class="body">{{ card.transport }}</v-list-item-content>
             </v-list-item>
             <v-list-item>
               <v-list-item-content class="caption">Time Received:</v-list-item-content>

@@ -3,7 +3,7 @@
     <!-- Navigation Bar -->
     <v-navigation-drawer
         v-model="drawer"
-        width="800"
+        width="700"
         absolute
         temporary
       >
