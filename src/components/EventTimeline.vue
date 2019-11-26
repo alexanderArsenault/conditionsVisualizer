@@ -3,7 +3,7 @@
     <v-card-title class="pt-6">Timeline</v-card-title>
 
     <v-tabs v-model="tab" grow>
-      <v-tab :key="`tab-${idx}`" v-for="(panel, idx) in eventsByOwnership">
+      <v-tab :key="`tab-${idx}`" v-for="(panel, idx) in deviationsByOwnership.filter( (entry) => entry.timeline.length > 0)">
         <v-icon left>mdi-numeric-{{ panel.timeline.filter( x => x.active).length }}-box</v-icon>
         {{panel.title}}
       </v-tab>
@@ -12,7 +12,7 @@
   <v-divider></v-divider>
     <v-tabs-items v-model="tab" class="pt-5">
       <v-tab-item
-        v-for="(panel, panelidx) in eventsByOwnership"
+        v-for="(panel, panelidx) in deviationsByOwnership.filter( (entry) => entry.timeline.length > 0)"
         class="timeline-list-container"
         :key="`timeline-group-${panelidx}`"
       >
@@ -42,7 +42,7 @@ export default {
   name: "EventTimeline",
   computed: {
     ...mapState(['shipments']),
-    ...mapGetters(['eventsByOwnership'])
+    ...mapGetters(['deviationsByOwnership'])
   },
   data() {
     return {

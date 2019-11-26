@@ -1,6 +1,6 @@
 <template>
   <div>
-    <svg :width="container" :height="container" v-bind:class="{expired: minValue==0}">
+    <svg :width="container" :height="container" v-bind:class="[{expired: minValue==0}, {expired: kill}]">
       <g :transform="`translate(${(container)/2}, ${container/2})`">
         <!-- Axial Axis + labels -->
         <g
@@ -114,6 +114,13 @@ export default {
     };
   },
 
+  props: {
+    kill: {
+      type: Boolean,
+      default: false,
+    }
+  },
+
   watch: {
     psb: "tweento"
   },
@@ -133,6 +140,7 @@ export default {
 
     stabilityScore() {
       if (this.minValue === 0) return 0;
+      if (this.kill) return 0;
       return Math.floor(
         this.values.reduce((acc, curr) => {
           return (acc = acc + curr.v);
@@ -236,6 +244,9 @@ text {
   font-family: "Open Sans", sans-serif;
 }
 .warning text.min {
+  fill: red;
+}
+.expired text.min {
   fill: red;
 }
 text.warning {

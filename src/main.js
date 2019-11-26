@@ -18,9 +18,10 @@ Vue.filter('formatdate', (date) => {
     month = '0' + month;
   if (day.length < 2) 
     day = '0' + day;
-  if (minutes.length < 2)
-    minutes = '0' + minutes
-  return [hours,minutes].join(':') + ', ' + [year, month, day].join('-');
+  if (minutes < 10)
+    minutes = '0' + minutes;
+
+  return [hours,minutes].join(':') + ', ' + [day, month, year].join('-');
 })
 
 new Vue({

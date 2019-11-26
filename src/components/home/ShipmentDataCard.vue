@@ -26,7 +26,7 @@
             </v-list-item>
 						<v-list-item>
               <v-list-item-content class="caption">Time Sent:</v-list-item-content>
-              <v-list-item-content class="body">{{ card.sent | formatdate }}</v-list-item-content>
+              <v-list-item-content class="body">{{ card.dispatched | formatdate }}</v-list-item-content>
             </v-list-item>
           </v-list>
         </v-col>
@@ -47,8 +47,8 @@
               <v-list-item-content class="body">{{ card.receiving }}</v-list-item-content>
             </v-list-item>
             <v-list-item>
-              <v-list-item-content class="caption">Time Received:</v-list-item-content>
-              <v-list-item-content class="body">{{ card.received | formatdate }}</v-list-item-content>
+              <v-list-item-content class="caption">Time Delivered:</v-list-item-content>
+              <v-list-item-content class="body">{{ card.delivered | formatdate }}</v-list-item-content>
             </v-list-item>
           </v-list>
         </v-col>

@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { eventlist } from './events'
+import { eventlist } from "./events";
 
 Vue.use(Vuex);
 
@@ -9,7 +9,7 @@ export default new Vuex.Store({
     bands: [
       {
         title: "> 25°C",
-        v: 10,
+        v: 100,
         allowed: 6,
         spent: 0,
         excursions_allowed: 1,
@@ -17,26 +17,26 @@ export default new Vuex.Store({
       },
       {
         title: "15°C - 25°C",
-        v: 75,
-        allowed: 12,
+        v: 100,
+        allowed: 50,
         spent: 0,
         excursions_allowed: 3,
         excursions_total: 0
       },
       {
         title: "8°C - 15°C",
-        v: 75,
-        allowed: 24,
+        v: 100,
+        allowed: 100,
         spent: 0,
-        excursions_allowed: 'Infinite',
+        excursions_allowed: "Infinite",
         excursions_total: 0
       },
       {
         title: "2°C - 8°C",
-        v: 75,
-        allowed: 'Infinite',
+        v: 100,
+        allowed: "Infinite",
         spent: 0,
-        excursions_allowed: 'n/a',
+        excursions_allowed: "n/a",
         excursions_total: 0
       },
       {
@@ -54,10 +54,10 @@ export default new Vuex.Store({
         spent: 0,
         excursions_allowed: 0,
         excursions_total: 0
-      },
+      }
     ],
-    eventlist: [...eventlist],
-    events: [
+    events: [...eventlist],
+    deviations: [
       {
         event_type: "USER_EVENT",
         stage: "MANUFACTURER",
@@ -66,14 +66,14 @@ export default new Vuex.Store({
           "Standing in sun or Tarmac before being loaded into plane hold, this can be an issue for passive cooling box if certified hours of performance has exceeded",
         time: new Date(),
         active: false,
-        custodian: 'Forwarder 1',
+        custodian: "Forwarder 1",
         duration: 2,
-        id: 'ID1908133',
+        id: "ID1908133",
         magnitude: "+30°C over threshold",
-        status: 'Released',
+        status: "Released",
         transformations: {
-          temperature: [2,2,2,0,0,0],
-          excursions: [1,1,1,0,0,0]
+          temperature: [2, 2, 2, 0, 0, 0],
+          excursions: [1, 1, 1, 0, 0, 0]
         }
       },
       {
@@ -83,14 +83,14 @@ export default new Vuex.Store({
         subtitle: "A delay at customs without active heating is a big oopsie",
         time: new Date(),
         active: false,
-        custodian: 'Forwarder 1',
+        custodian: "Forwarder 1",
         duration: 48,
-        id: 'ID1908417',
-        magnitude: '+5°C over threshold',
-        status: 'Released',
+        id: "ID1908417",
+        magnitude: "+5°C over threshold",
+        status: "Released",
         transformations: {
-          temperature: [0,0,48,0,0,0],
-          excursions: [0,0,1,0,0,0]
+          temperature: [0, 0, 48, 0, 0, 0],
+          excursions: [0, 0, 1, 0, 0, 0]
         }
       },
       {
@@ -100,14 +100,14 @@ export default new Vuex.Store({
         subtitle: "The trucks cooling system failed. This is widely regarded to be a bad thing.",
         time: new Date(),
         active: false,
-        custodian: 'Forwarder 2',
+        custodian: "Forwarder 2",
         duration: 6,
-        id: 'ID1908464',
-        magnitude: '-10°C below threshold',
-        status: 'Released',
+        id: "ID1908464",
+        magnitude: "-10°C below threshold",
+        status: "Released",
         transformations: {
-          temperature: [0,0,0,0,0,6],
-          excursions: [0,0,0,0,0,1]
+          temperature: [0, 0, 0, 0, 0, 6],
+          excursions: [0, 0, 0, 0, 0, 1]
         }
       },
       {
@@ -117,14 +117,14 @@ export default new Vuex.Store({
         subtitle: "Blackout & backup system error leads to warehouse environmental controls failing",
         time: new Date(),
         active: false,
-        custodian: 'Wholesaler',
+        custodian: "Wholesaler",
         duration: 24,
-        id: 'ID1908501',
-        magnitude: '+10°C over threshold',
-        status: 'Released',
+        id: "ID1908501",
+        magnitude: "+10°C over threshold",
+        status: "Released",
         transformations: {
-          temperature: [0,24,24,0,0,0],
-          excursions: [0,1,1,0,0,0]
+          temperature: [0, 24, 24, 0, 0, 0],
+          excursions: [0, 1, 1, 0, 0, 0]
         }
       },
       {
@@ -135,14 +135,14 @@ export default new Vuex.Store({
           "Union mandated break leaves product sitting on the dock before being transfered into condition controlled storage.",
         time: new Date(),
         active: false,
-        custodian: 'Forwarder 3',
+        custodian: "Forwarder 3",
         duration: 2,
-        id: 'ID1908598',
-        magnitude: '+5°C over threshold',
-        status: 'Released',
+        id: "ID1908598",
+        magnitude: "+5°C over threshold",
+        status: "Released",
         transformations: {
-          temperature: [0,0,2,0,0,0],
-          excursions: [0,0,1,0,0,0]
+          temperature: [0, 0, 2, 0, 0, 0],
+          excursions: [0, 0, 1, 0, 0, 0]
         }
       },
       {
@@ -152,14 +152,14 @@ export default new Vuex.Store({
         subtitle: "Patient leaves goods in car in a sunny parking lot during shopping",
         time: new Date(),
         active: false,
-        custodian: 'Patient',
+        custodian: "Patient",
         duration: 2,
-        id: 'ID1908647',
-        magnitude: '+20°C over threshold',
-        status: 'Released',
+        id: "ID1908647",
+        magnitude: "+20°C over threshold",
+        status: "Released",
         transformations: {
-          temperature: [2,2,2,0,0,0],
-          excursions: [1,1,1,0,0,0]
+          temperature: [2, 2, 2, 0, 0, 0],
+          excursions: [1, 1, 1, 0, 0, 0]
         }
       },
       // done 2
@@ -170,62 +170,72 @@ export default new Vuex.Store({
         subtitle: "Patient forgets to put medicine into fridge after using.",
         time: new Date(),
         active: false,
-        custodian: 'Patient',
+        custodian: "Patient",
         duration: 12,
-        id: 'ID1908949',
-        magnitude: '+14°C over threshold',
-        status: 'Released',
+        id: "ID1908949",
+        magnitude: "+14°C over threshold",
+        status: "Released",
         transformations: {
-          temperature: [0,12,12,0,0,0],
-          excursions: [0,1,1,0,0,0]
+          temperature: [0, 12, 12, 0, 0, 0],
+          excursions: [0, 1, 1, 0, 0, 0]
         }
-      },
+      }
     ],
     shipments: [
       {
         title: "Manufacturer",
         stage: "MANUFACTURER",
         details: {
-          title: "#OA 66780093",
-          owner: "Wholeslaer",
-          custodian: "Marie S.B Mueller",
-          sending: "Wholesaler",
-          receiving: "Hospital Warehouse",
-          time_delta: "4 hours",
-          deviations: "No Deviations",
-          sent: new Date(),
-          received: new Date()
+          title: "KN-9022232221",
+          owner: "Novo Nordisk",
+          custodian: "Kühne & Nagel",
+          sending: "Norvo Nordisk, Clayton, North Carolina",
+          receiving: "Züllig Pharma, Selangor, Malaysia",
+          time_deviation: 0,
+          condition_deviation: 0,
+          url: "https://goo.gl/maps/L8KVMSeG7hs4LbKK6",
+          items_expired: "of 550",
+          dispatched: "03/05/2019 11:22:00",
+          delivered: "03/07/2019 15:07:00"
         }
       },
       {
         title: "Affiliate",
         stage: "AFFILIATE",
         details: {
-          title: "#OA 66780093",
-          owner: "Wholeslaer",
-          custodian: "Marie S.B Mueller",
-          sending: "Wholesaler",
-          receiving: "Hospital Warehouse",
-          time_delta: "4 hours",
-          deviations: "No Deviations",
-          sent: new Date(),
-          received: new Date()
+          title: "ZG-7844932-122",
+          owner: "Novo Nordisk",
+          custodian: "Züllig Pharma",
+          sending: "Züllig Pharma, Selangor, Malaysia",
+          receiving: "Apex Pharma Co., Subang Jaya, Malaysia",
+          time_deviation: 0,
+          condition_deviation: 0,
+          url: "https://goo.gl/maps/9d54qkz7DoPSaaDeA",
+          items_expired: "of 150",
+          dispatched: "03/08/2019 11:10:00",
+          delivered: "03/08/2019 18:50:00"
         }
       },
       {
         title: "Wholesaler",
         stage: "WHOLESALER",
         details: {
-          title: "#OA 66780093",
-          owner: "Wholeslaer",
-          custodian: "Marie S.B Mueller",
-          sending: "Wholesaler",
-          receiving: "Hospital Warehouse",
-          time_delta: "4 hours",
-          deviations: "No Deviations",
-          sent: new Date(),
-          received: new Date()
+          title: "MP-448523",
+          owner: "Apex Pharma Co",
+          custodian: "Malaysia Post",
+          sending: "Apex Pharma Co., Subang Jaya, Malaysia",
+          receiving: "JH Pharmacy, Sitiawan, Malaysia",
+          time_deviation: 0,
+          condition_deviation: 0,
+          url: "https://goo.gl/maps/9d54qkz7DoPSaaDeA",
+          items_expired: "of 10",
+          dispatched: "03/21/2019 09:16:00",
+          delivered: "03/21/2019 15:43:00"
         }
+      },
+      {
+        title: "Pharmacy",
+        stage: "PHARMACY"
       },
       {
         title: "Patient",
@@ -235,92 +245,125 @@ export default new Vuex.Store({
   },
   getters: {
     activeEvents: (state, getters) => {
-      return state.eventlist.filter(item => item.dynamic === false || (item.dynamic === true && getters.activeDeviationList.includes(item.id)))
+      return state.events.filter(
+        item => item.dynamic === false || (item.dynamic === true && getters.activeDeviationsList.includes(item.id))
+      );
     },
-    
+
+    articleEventsByCustodian: (state, getters) => {
+      return getters.activeEvents
+      // get list of custodians from events
+        .reduce((acc, curr) => {
+          if (acc.findIndex(x => x === curr.custodian) === -1) {
+            acc.push(curr.custodian);
+            return acc;
+          } else return acc;
+        }, [])
+        // get all events by the custodian. - sue me, i'm in a rush
+        .reduce((acc, curr) => {
+          let newobject = {
+            custodian: curr,
+            timeline: getters.activeEvents.filter(item => item.custodian === curr && item.article_view === true)
+          };
+          return [...acc, newobject];
+        }, []);
+    },
+
     activeDeviations: state => {
-      return state.events.filter(item => item.active === true)
+      return state.deviations.filter(item => item.active === true);
     },
-    activeDeviationList: (state, getters) => {
-      return getters.activeDeviations.reduce( (acc, curr) => {
-        return [...acc, curr.id]
-      }, [])
+
+    activeDeviationsList: (state, getters) => {
+      return getters.activeDeviations.reduce((acc, curr) => {
+        return [...acc, curr.id];
+      }, []);
     },
-    activeDeviationTimeTotal: (state, getters) => {
-      return getters.activeDeviations.reduce( (acc, curr) => {
-        for (let i = 0; i < acc.length; i++){
-          acc[i] += curr.transformations.temperature[i]
-        }
-        return acc
-      },[0,0,0,0,0,0])
+
+    deviationsByOwnership: state => {
+      return state.shipments.reduce((acc, curr) => {
+        let newshipment = {
+          title: curr.title,
+          details: curr.details
+        };
+        newshipment.timeline = state.deviations.filter(event => event.stage === curr.stage);
+        return [...acc, newshipment];
+      }, []);
     },
-    activeDeviationExcursionTotal: (state, getters) => {
-      return getters.activeDeviations.reduce( (acc, curr) => {
-        for (let i = 0; i < acc.length; i++){
-          acc[i] += curr.transformations.excursions[i]
-        }
-        return acc
-      },[0,0,0,0,0,0])
+
+    timeTotal: (state, getters) => {
+      return getters.activeDeviations.reduce(
+        (acc, curr) => {
+          for (let i = 0; i < acc.length; i++) {
+            acc[i] += curr.transformations.temperature[i];
+          }
+          return acc;
+        },
+        [0, 0, 0, 0, 0, 0]
+      );
+    },
+
+    excursionTotal: (state, getters) => {
+      return getters.activeDeviations.reduce(
+        (acc, curr) => {
+          for (let i = 0; i < acc.length; i++) {
+            acc[i] += curr.transformations.excursions[i];
+          }
+          return acc;
+        },
+        [0, 0, 0, 0, 0, 0]
+      );
     },
     // TODO:  Excursion Timeline new transformation format
 
     updatedBands: (state, getters) => {
-      return state.bands.reduce( (acc, curr, idx) => {
-        curr.spent = getters.activeDeviationTimeTotal[idx]
-        curr.excursions_total = getters.activeDeviationExcursionTotal[idx]
-        return [...acc, curr]
-      }, [])
+      return state.bands.reduce((acc, curr, idx) => {
+        curr.spent = getters.timeTotal[idx];
+        curr.excursions_total = getters.excursionTotal[idx];
+        return [...acc, curr];
+      }, []);
     },
-    eventsByOwnership: state => {
-      return state.shipments.reduce((acc, curr) => { 
-        let newshipment = {
-          title: curr.title,
-          details: curr.details,
-        }
-        newshipment.timeline = state.events.filter( event => event.stage === curr.stage)
-        return [...acc, newshipment]
-      }, [])
-    },
-    deviationsByOwnership: state => {
-      return state.shipments.reduce((acc, curr) => { 
-        let newshipment = {
-          title: curr.title,
-          details: curr.details,
-        }
-        newshipment.timeline = state.events.filter( event => event.stage === curr.stage && event.active === true)
-        return [...acc, newshipment]
-      }, [])
-    },
+
     psb: (state, getters) => {
-      return getters.updatedBands.reduce( (acc, curr) => {
-        if (curr.allowed === 'Infinite' || curr.spent === 0 ){
-          return [...acc, {
-            k: curr.title,
-            v: 100
-          }]
-        } else if (curr.spent > curr.allowed) {
-          return [...acc, {
-            k: curr.title,
-            v: 0
-          }]
-        } else {
-          return [...acc, {
-            k: curr.title,
-            v: Math.max(0, (100 - (curr.spent / curr.allowed) * 100))
-          }]
-        }
-      }, []).reverse()
+      return getters.updatedBands
+        .reduce((acc, curr) => {
+          if (curr.allowed === "Infinite" || curr.spent === 0) {
+            return [
+              ...acc,
+              {
+                k: curr.title,
+                v: 100
+              }
+            ];
+          } else if (curr.spent > curr.allowed) {
+            return [
+              ...acc,
+              {
+                k: curr.title,
+                v: 0
+              }
+            ];
+          } else {
+            return [
+              ...acc,
+              {
+                k: curr.title,
+                v: Math.max(0, 100 - (curr.spent / curr.allowed) * 100)
+              }
+            ];
+          }
+        }, [])
+        .reverse();
     }
   },
   mutations: {
-    toggleEventActive(state, target){
-      let idx = state.events.findIndex( event => event.title === target.title)
-      Vue.set(state.events[idx], 'active', !target.active)
+    toggleEventActive(state, target) {
+      let idx = state.deviations.findIndex(event => event.title === target.title);
+      Vue.set(state.deviations[idx], "active", !target.active);
     }
   },
   actions: {
     toggleEvent({ commit }, target) {
-      commit('toggleEventActive', target)
+      commit("toggleEventActive", target);
     }
   }
 });
