@@ -68,6 +68,7 @@ export default new Vuex.Store({
         active: false,
         custodian: "Forwarder 1",
         duration: 2,
+        items_expired: 25,
         id: "ID1908133",
         magnitude: "+30°C over threshold",
         status: "Released",
@@ -85,6 +86,8 @@ export default new Vuex.Store({
         active: false,
         custodian: "Forwarder 1",
         duration: 48,
+        time_deviation: 72,
+        items_expired: 85,
         id: "ID1908417",
         magnitude: "+5°C over threshold",
         status: "Released",
@@ -96,11 +99,12 @@ export default new Vuex.Store({
       {
         event_type: "USER_EVENT",
         stage: "AFFILIATE",
-        title: "Failure of truck cooling system",
+        title: "Truck Cooling Malfunction",
         subtitle: "The trucks cooling system failed. This is widely regarded to be a bad thing.",
         time: new Date(),
         active: false,
         custodian: "Forwarder 2",
+        items_expired: 150,
         duration: 6,
         id: "ID1908464",
         magnitude: "-10°C below threshold",
@@ -118,6 +122,7 @@ export default new Vuex.Store({
         time: new Date(),
         active: false,
         custodian: "Wholesaler",
+        items_expired: 0,
         duration: 24,
         id: "ID1908501",
         magnitude: "+10°C over threshold",
@@ -136,6 +141,7 @@ export default new Vuex.Store({
         time: new Date(),
         active: false,
         custodian: "Forwarder 3",
+        items_expired: 0,
         duration: 2,
         id: "ID1908598",
         magnitude: "+5°C over threshold",
@@ -189,8 +195,8 @@ export default new Vuex.Store({
           title: "KN-9022232221",
           owner: "Novo Nordisk",
           custodian: "Kühne & Nagel",
-          sending: "Norvo Nordisk, Clayton, North Carolina",
-          receiving: "Züllig Pharma, Selangor, Malaysia",
+          sending: "Norvo Nordisk, Clayton, US",
+          receiving: "Züllig Pharma, Selangor, MY",
           time_deviation: 0,
           condition_deviation: 0,
           url: "https://goo.gl/maps/L8KVMSeG7hs4LbKK6",
@@ -206,8 +212,8 @@ export default new Vuex.Store({
           title: "ZG-7844932-122",
           owner: "Novo Nordisk",
           custodian: "Züllig Pharma",
-          sending: "Züllig Pharma, Selangor, Malaysia",
-          receiving: "Apex Pharma Co., Subang Jaya, Malaysia",
+          sending: "Züllig Pharma, Selangor, MY",
+          receiving: "Apex Pharma Co., Subang Jaya, MY",
           time_deviation: 0,
           condition_deviation: 0,
           url: "https://goo.gl/maps/9d54qkz7DoPSaaDeA",
@@ -223,8 +229,8 @@ export default new Vuex.Store({
           title: "MP-448523",
           owner: "Apex Pharma Co",
           custodian: "Malaysia Post",
-          sending: "Apex Pharma Co., Subang Jaya, Malaysia",
-          receiving: "JH Pharmacy, Sitiawan, Malaysia",
+          sending: "Apex Pharma Co., Subang Jaya, MY",
+          receiving: "JH Pharmacy, Sitiawan, MY",
           time_deviation: 0,
           condition_deviation: 0,
           url: "https://goo.gl/maps/9d54qkz7DoPSaaDeA",
@@ -268,6 +274,15 @@ export default new Vuex.Store({
           return [...acc, newobject];
         }, []);
     },
+
+    hasDeviation: (state, getters) => {
+      return (stage) => getters.activeDeviations.filter( deviation => deviation.stage === stage).length > 0
+    },
+
+    deviationsByStage: (state, getters) => {
+      return (stage) => getters.activeDeviations.filter( deviation => deviation.stage === stage)
+    },
+
 
     activeDeviations: state => {
       return state.deviations.filter(item => item.active === true);

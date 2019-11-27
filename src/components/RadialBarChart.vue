@@ -18,7 +18,7 @@
         </g>
 
         <!-- center background -->
-        <circle :r="width/4.5" style="fill: #fafafa" />
+        <circle :r="width/4.5" style="fill: white" />
 
         <!-- center value -->
         <text

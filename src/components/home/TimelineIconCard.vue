@@ -2,16 +2,16 @@
   <div class="event-card">
     <div
       class="icon-circle"
-      :style="'border:1px solid ' + color"
+      :style="'border:1px solid ' + colorPick"
     >
       <v-icon
-        :color="color"
+        :color="colorPick"
       >
         {{ icon }}
       </v-icon>
     </div>
     <div class="event-text">
-      <h3>
+      <h3 :style="'color:' + colorPick">
         <slot name="title" />
       </h3>
       <p><slot name="subtitle" /></p>
@@ -32,6 +32,32 @@ export default {
     icon: {
       type: String,
       default: 'mdi-check'
+    }
+  },
+  computed : {
+    colorPick(){
+      let val = ''
+      switch(this.icon){
+        case 'mdi-file-document-box-check-outline':
+          val = 'green';
+        break;
+        case 'mdi-location-exit':
+          val = '#2196F3'
+        break;
+        case 'mdi-location-enter':
+          val = '#2196F3'
+        break;
+        case 'mdi-handshake':
+          val = '#23395d'
+        break;
+        case 'mdi-alert-outline':
+          val = '#ffae42'
+        break;
+        default:
+          val = 'black'
+          break;
+      }
+      return val
     }
   }
 }

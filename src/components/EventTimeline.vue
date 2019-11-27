@@ -27,8 +27,7 @@
           </div>
           <div v-if="item.event_type === 'USER_EVENT'"  @click="activeEvent(item)" :class="[{'timeline-active' : item.active}, 'timeline-item-actionable']">
             <p class="body-1 mb-0">{{item.title}}</p>
-            <p class="caption">{{item.time | formatdate}}</p>
-            <p class="caption mb-0">{{item.subtitle}}</p>
+            <p class="caption mb-0">{{item.time | formatdate}}</p>
           </div>
         </div>
       </v-tab-item>

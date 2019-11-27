@@ -211,7 +211,7 @@ export const eventlist = [
     shipment_id: "KN-9022232221",
     additional_info: "Flight No KL121",
     style: "->|",
-    icon: "location-enter"
+    icon: "location-exit"
   },
   {
     stage: "MANUFACTURER",
@@ -224,7 +224,7 @@ export const eventlist = [
     shipment_id: "KN-9022232221",
     additional_info: "",
     style: "Info",
-    icon: "information-outline"
+    icon: "location-enter"
   },
   {
     stage: "MANUFACTURER",
@@ -333,7 +333,7 @@ export const eventlist = [
     shipment_id: "KN-9022232221",
     additional_info: "Logger ID: 3382837",
     style: "->|",
-    icon: "location-enter"
+    icon: "information-outline"
   },
   {
     stage: "MANUFACTURER",
@@ -347,7 +347,7 @@ export const eventlist = [
     shipment_id: "KN-9022232221",
     additional_info: "Logger ID: 5688374",
     style: "->|",
-    icon: "location-enter"
+    icon: "information-outline"
   },
   {
     stage: "MANUFACTURER",
@@ -361,7 +361,7 @@ export const eventlist = [
     shipment_id: "KN-9022232221",
     additional_info: "Logger ID: 3665888",
     style: "->|",
-    icon: "location-enter"
+    icon: "information-outline"
   },
   {
     stage: "MANUFACTURER",
@@ -374,7 +374,7 @@ export const eventlist = [
     shipment_id: "KN-9022232221",
     additional_info: "Type: Temperature, Source: 3382837",
     style: "Info",
-    icon: "information-outline"
+    icon: "location-enter"
   },
   {
     stage: "MANUFACTURER",
@@ -389,6 +389,8 @@ export const eventlist = [
     style: "check box with form",
     icon: "file-document-box-check-outline"
   },
+  // TODO: IF COLDFAIL - REJECTION HERE INSTEAD OF ABOVE
+  // CHANGE TITLE: QUALITY RELEASE: REJECTED AND COLOUR AND ICON
   {
     stage: "MANUFACTURER",
     article_view: "",
@@ -441,6 +443,7 @@ export const eventlist = [
     style: "Handover",
     icon: "handshake"
   },
+  // KEEP ALL ABOVE IN KILL CONDITION 1
   {
     stage: "AFFILIATE",
     article_view: "",
@@ -893,6 +896,7 @@ export const eventlist = [
     style: "check box with form",
     icon: "file-document-box-check-outline"
   },
+  // TODO:  TURN ABOVE RED ON TWO EVENT FAIL AND CHANGE ICON
   {
     stage: "PATIENT",
     id: "ID1908949",

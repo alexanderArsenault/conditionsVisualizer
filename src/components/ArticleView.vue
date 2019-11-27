@@ -2,30 +2,42 @@
   <div>
     <v-sheet class="mb-3" elevation="1">
       <v-row class="mr-5 ml-5 pb-4 pt-4">
-        <v-col class="overview-header-item" md="4">
+        <v-col class="overview-header-item" md="3">
           <p class="body-2">Product Details</p>
-          <p class="subtitle">Anineziperine™</p>
+          <p class="subtitle">Fiasp™</p>
         </v-col>
-        <v-col class="overview-header-item" md="4">
-          <p class="body-2">Product Identifier</p>
-          <p class="subtitle">HG-705215-AE</p>
+        <v-col class="overview-header-item" md="3">
+          <p class="body-2">Product Identifier (GTIN)</p>
+          <p class="subtitle">7680662010017</p>
         </v-col>
-        <v-col class="overview-header-item" md="4">
-          <p class="body-2">Production Batch</p>
-          <p class="subtitle">#02990005</p>
+        <v-col class="overview-header-item" md="3">
+          <p class="body-2">Serial Number</p>
+          <p class="subtitle">126103</p>
+        </v-col>
+        <v-col class="overview-header-item" md="3">
+          <p class="body-2">LOT</p>
+          <p class="subtitle">#10802954</p>
         </v-col>
       </v-row>
     </v-sheet>
     <icon-insight-cards :cards="insights"></icon-insight-cards>
 
     <v-sheet class="mt-3" elevation="2">
-      <v-list-item>Product Stability Budget</v-list-item>
+      <v-list-item class="headline pt-6 pb-4">Product Stability Budget</v-list-item>
+      <v-list-item class="subtitle">Events by Custodian</v-list-item>
       <v-row class="pb-5">
         <v-col class="pt-0 pb-0" md="4">
-          <v-container v-for="(owner, index) in articleEventsByCustodian" :key="`owner-${index}`">
-            <v-list-item>{{owner.custodian}}</v-list-item>
-							<events-icon-timeline style="max-height: 250px;" :eventsList="owner.timeline"/>
-          </v-container>
+          <v-expansion-panels accordion mandatory class="event-sidebar">
+            <v-expansion-panel
+              v-for="(owner, index) in articleEventsByCustodian"
+              :key="`owner-${index}`"
+            >
+              <v-expansion-panel-header>{{owner.custodian}}</v-expansion-panel-header>
+              <v-expansion-panel-content>
+              <events-icon-timeline style="max-height: 250px;" :eventsList="owner.timeline" />
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
         </v-col>
         <v-col class="pt-0 pb-0 pr-7" md="8">
           <div class="psb-container">
@@ -43,12 +55,18 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="band in updatedBands" :key="band.name" :class="{ expired: band.excursions_total > band.excursions_allowed }">
+                <tr
+                  v-for="band in updatedBands"
+                  :key="band.name"
+                  :class="{ expired: band.excursions_total > band.excursions_allowed }"
+                >
                   <td class="text-center">{{ band.title }}</td>
                   <td class="text-center">{{ band.allowed }}</td>
                   <td class="text-center">{{ band.spent }}</td>
                   <td class="text-center">{{ band.excursions_allowed }}</td>
-                  <td :class="['text-center', { bold: band.excursions_total > band.excursions_allowed }]">{{ band.excursions_total }}</td>
+                  <td
+                    :class="['text-center', { bold: band.excursions_total > band.excursions_allowed }]"
+                  >{{ band.excursions_total }}</td>
                 </tr>
               </tbody>
             </template>
@@ -83,7 +101,7 @@
 
 <script>
 import IconInsightCards from "./home/IconInsightCards";
-import EventsIconTimeline from './home/EventsIconTimeline';
+import EventsIconTimeline from "./home/EventsIconTimeline";
 import RadialBarChart from "./RadialBarChart.vue";
 import { mapState, mapGetters } from "vuex";
 
@@ -95,9 +113,18 @@ export default {
   },
   computed: {
     ...mapState(["bands"]),
-    ...mapGetters(["articleEventsByCustodian", 'activeDeviations', 'updatedBands', 'activeEvents']),
-    tooManyExcursions(){
-      return this.bands.filter( band => band.excursions_total > band.excursions_allowed).length > 0
+    ...mapGetters([
+      "articleEventsByCustodian",
+      "activeDeviations",
+      "updatedBands",
+      "activeEvents"
+    ]),
+    tooManyExcursions() {
+      return (
+        this.bands.filter(
+          band => band.excursions_total > band.excursions_allowed
+        ).length > 0
+      );
     }
   },
   data() {
@@ -106,20 +133,20 @@ export default {
         {
           title: "Patient",
           subtitle: "Custodian",
-          icon: "mdi-truck",
+          icon: "mdi-account",
           color: "indigo",
           colorModifier: "darken-4"
         },
         {
           title: "Released",
           subtitle: "Quality Release Status",
-          icon: "mdi-box",
+          icon: "mdi-file-document-box-check-outline",
           color: "red"
         },
         {
           title: "Product OK",
           subtitle: "Article State",
-          icon: "mdi-check",
+          icon: "mdi-checkbox-marked-circle-outline",
           color: "black"
         }
       ]
@@ -167,6 +194,13 @@ export default {
   margin-bottom: 15px;
   .caption {
     margin-bottom: 0;
+  }
+}
+.event-sidebar ::v-deep{
+  .v-expansion-panel-content__wrap {
+    padding: 0;
+    padding-bottom: 20px;
+    padding-left: 5px;
   }
 }
 </style>

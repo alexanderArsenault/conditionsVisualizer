@@ -33,9 +33,9 @@
 								</v-list-item-content>
 							</v-list-item>
 							<v-container class="pt-0">
-								<v-row :key="`shipment-card-${index}`" v-for="(shipment, index) in shipmentsWithInfo">
+								<v-row :key="`shipment-card-${index}`" v-for="(shipment, index) in visibleShipments">
 									<v-col>
-										<shipment-data-card :card="shipment.details" />
+										<shipment-data-card :class="{ 'has-deviation': hasDeviation(shipment.stage)}" :deviations="deviationsByStage(shipment.stage)" :card="shipment.details" />
 									</v-col>
 								</v-row>
 							</v-container>
@@ -64,19 +64,21 @@ export default {
 	},
 	computed: {
 		...mapState(['shipments']),
-		...mapGetters(['activeDeviations', 'activeEvents']),
-		activeDeviationList(){
-			return this.activeDeviations.reduce( (acc, curr) => {
-				return [...acc, curr.id]
-			})
+		...mapGetters(['activeDeviations', 'activeEvents', 'activeDeviationsList', 'hasDeviation', 'deviationsByStage']),
+		visibleShipments(){
+			let returnshipments = this.shipments.filter( x => x.details !== undefined)
+			if (this.failConditionOne){
+				returnshipments = returnshipments.filter( x => x.stage === 'MANUFACTURER' || x.stage === 'AFFILIATE' )
+			}
+			return returnshipments
 		},
-		shipmentsWithInfo(){
-			return this.shipments.filter( x => x.details !== undefined)
+		failConditionOne(){
+			return this.activeDeviationsList.includes('ID1908464')
 		}
 	},
   data() {
     return {
-			tab: 1,
+			tab: 0,
     };
   }
 };
@@ -117,5 +119,9 @@ export default {
 
 .v-tabs-items, .v-tabs-bar {
 	background-color: transparent !important;
+}
+
+.has-deviation {
+	border: 1px solid #ffae42 !important;
 }
 </style>
